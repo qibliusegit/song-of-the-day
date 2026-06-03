@@ -16,8 +16,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    if message.content.startswith('natori'):
+        await message.channel.send('natori is my goat i love polargeist wait no thats geometry dash i mean poltergeist')
+
+    if message.content.startswith('j-rock') or message.content.startswith('jrock'):
+        await message.channel.send('its me, your friendly neighborhood jrock enthusiast!')
+
+
 
 client.run(BOT_TOKEN)
 
