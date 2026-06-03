@@ -17,12 +17,11 @@ def daily_song():
         if song.text != '{"track":null}':
             real_song = True
             print("i found a real song boss")
-            parts = song.text.split()
-            print(parts)
-            return(parts)
+            return song.json()
 
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
+title = []
 import discord
 import requests
 import random
@@ -51,8 +50,16 @@ async def on_message(message):
 
     if message.content == '?SOOD':
         await message.channel.send('give me a second to curate the perfect song of the day!')
-        song_of_the_day = daily_song()
-        await message.channel.send(song_of_the_day)
+        info = daily_song()
+        title = info['track'][0]['strTrack']
+        artist = info['track'][0]['strArtist']
+        album = info['track'][0]['strAlbum']
+        await message.channel.send("Your Song of the Day:")
+        await message.channel.send(f"Title: {title}")
+        await message.channel.send(f"Artist: {artist}")
+        await message.channel.send(f"Album: {album}")
+        if info['track'][0]['strArtist'].lower == "asian kung-fu generation" or info['track'][0]['strArtist'].lower() == "kessoku band":
+            await message.channel.send('omg bocchi the rock reference')  
 
     if client.user.mentioned_in(message):
         await message.channel.send('hi do you wanna talk about jrock i really like jrock')
