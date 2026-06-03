@@ -6,5 +6,4 @@ The bot uses the Audio DB ( https://www.theaudiodb.com/ )'s v1 (free) API to fin
 Audio DB, but it warns you beforehand. It displays the song's name, artist, and album. If a request for a song of the day is made multiple times in the same day, as long as the bot is continueously being run during that time, the bot will simply display the song it made the first time, so it's daily rather than being a random generator.
 
 Future plans:
-- React if people in the server are listening to J-Rock songs on the server it's on (I'm not currently sure if this is actually possible without Spotify Premium, I shall see.)
 - Add more interactivity to it so it can also give information on songs
