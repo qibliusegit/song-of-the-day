@@ -1,15 +1,26 @@
 def daily_song():
-    char1 = random.randint(0,25)
-    char2 = random.randint(0,25)
-    let1 = letter[char1]
-    let2 = letter[char2]
-    query = let1 + let2
-    print(query)
-    song_search = f"https://musicbrainz.org/ws/2/work/?query={query}"
-    song = requests.get(song_search)
-    print(song.text)
+    real_song = False
+    while not real_song:
+        char1 = random.randint(0,9)
+        char2 = random.randint(0,9)
+        char3 = random.randint(0,9)
+        char4 = random.randint(0,9)
+        char5 = random.randint(0,9)
+        char6 = random.randint(0,9)
+        char7 = random.randint(0,9)
+        char8 = random.randint(0,9)
+        query = str(char1) + str(char2) + str(char3) + str(char4) + str(char5) + str(char6) + str(char7) + str(char8)
+        print(query)
+        song_search = f"https://www.theaudiodb.com/api/v1/json/123/track.php?m={query}"
+        song = requests.get(song_search)
+        print(song.text)
+        if song.text != '{"track":null}':
+            real_song = True
+            print("i found a real song boss")
+            parts = song.text.split()
+            print(parts)
+            return(parts)
 
-letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
 import discord
@@ -39,7 +50,9 @@ async def on_message(message):
         await message.channel.send('im always larping, except for jrock, i love jrock')
 
     if message.content == '?SOOD':
-        daily_song()
+        await message.channel.send('give me a second to curate the perfect song of the day!')
+        song_of_the_day = daily_song()
+        await message.channel.send(song_of_the_day)
 
     if client.user.mentioned_in(message):
         await message.channel.send('hi do you wanna talk about jrock i really like jrock')
