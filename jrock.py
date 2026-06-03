@@ -1,7 +1,7 @@
 def daily_song():
     real_song = False
-    while not real_song:
-        char1 = random.randint(0,9)
+    while not real_song: # generates an 8 digit code, the length of AudioDB's IDs. Then checks if that matches up with an actual song on the database, and tries again if it doesn't #
+        char1 = random.randint(0,4)
         char2 = random.randint(0,9)
         char3 = random.randint(0,9)
         char4 = random.randint(0,9)
@@ -21,8 +21,7 @@ def daily_song():
 
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
-title = []
-import discord
+import discord        
 import requests
 import random
 intents = discord.Intents.default()
@@ -32,13 +31,14 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {client.user}') # confirms that you're logged in as the bot you're trying to log in as #
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == client.user: # makes sure the bot isn't responding to itself forever if one of it's messages contains a trigger work
         return
 
+# various words that trigger the bot to says certain things #
     if 'natori' in message.content.lower():
         await message.channel.send('natori is my goat i love polargeist wait no thats geometry dash i mean poltergeist')
 
@@ -48,6 +48,7 @@ async def on_message(message):
     if "larp" in message.content.lower():
         await message.channel.send('im always larping, except for jrock, i love jrock')
 
+# runs the daily song function and prints out the song's info. also reacts if song of the day is by two specific j-rock artists #
     if message.content == '?SOOD':
         await message.channel.send('give me a second to curate the perfect song of the day!')
         info = daily_song()
@@ -66,7 +67,7 @@ async def on_message(message):
 
 
 
-
+# runs code #
 client.run(BOT_TOKEN)
 
 
