@@ -21,9 +21,11 @@ def daily_song():
 
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
+thedate = ""
 import discord        
 import requests
 import random
+from datetime import date
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -50,17 +52,25 @@ async def on_message(message):
 
 # runs the daily song function and prints out the song's info. also reacts if song of the day is by two specific j-rock artists #
     if message.content == '?SOOD':
-        await message.channel.send('give me a second to curate the perfect song of the day!')
-        info = daily_song()
-        title = info['track'][0]['strTrack']
-        artist = info['track'][0]['strArtist']
-        album = info['track'][0]['strAlbum']
-        await message.channel.send("Your Song of the Day:")
+        global thedate
+        global info
+        global title
+        global artist
+        global album
+        if thedate == "" or thedate != str(date.today()):
+            await message.channel.send('give me a second to curate the perfect song of the day!')
+            info = daily_song()
+            title = info['track'][0]['strTrack']
+            artist = info['track'][0]['strArtist']
+            album = info['track'][0]['strAlbum']
+        await message.channel.send("Song of the Day:")
         await message.channel.send(f"Title: {title}")
         await message.channel.send(f"Artist: {artist}")
         await message.channel.send(f"Album: {album}")
         if info['track'][0]['strArtist'].lower == "asian kung-fu generation" or info['track'][0]['strArtist'].lower() == "kessoku band":
             await message.channel.send('omg bocchi the rock reference')  
+
+
 
     if client.user.mentioned_in(message):
         await message.channel.send('hi do you wanna talk about jrock i really like jrock')
