@@ -1,5 +1,3 @@
-# i have NO IDEA what i'm doing tbh #
-
 letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
@@ -29,7 +27,7 @@ async def on_message(message):
     if message.content.startswith('larp'):
         await message.channel.send('im always larping, except for jrock, i love jrock')
 
-    if message.content("?SOOD"):
+    if message.content == '?SOOD':
         daily_song()
 
     def daily_song():
