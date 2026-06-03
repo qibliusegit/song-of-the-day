@@ -14,14 +14,16 @@ def daily_song():
         song_search = f"https://www.theaudiodb.com/api/v1/json/123/track.php?m={query}"
         song = requests.get(song_search)
         print(song.text)
-        if song.text != '{"track":null}':
+        if song.text != '{"track":null}' and query not in songlist:
             real_song = True
             print("i found a real song boss")
+            songlist.append(query)
             return song.json()
 
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
 thedate = ""
+songlist = []
 import discord        
 import requests
 import random
@@ -58,6 +60,7 @@ async def on_message(message):
         global artist
         global album
         if thedate == "" or thedate != str(date.today()):
+            thedate = str(date.today())
             await message.channel.send('give me a second to curate the perfect song of the day!')
             info = daily_song()
             title = info['track'][0]['strTrack']
