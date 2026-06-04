@@ -23,7 +23,7 @@ def daily_song():
 
 BOT_TOKEN = "YOUR_TOKEN_HERE"
 thedate = ""
-songlist = []
+songlist = [] # keeps track of IDs that have already been used so you don't get duplicate songs #
 import discord        
 import requests
 import random
@@ -39,7 +39,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author == client.user: # makes sure the bot isn't responding to itself forever if one of it's messages contains a trigger work
+    if message.author == client.user: # makes sure the bot isn't responding to itself forever if one of it's messages contains a trigger word #
         return
 
 # various words that trigger the bot to says certain things #
@@ -59,22 +59,27 @@ async def on_message(message):
         global title
         global artist
         global album
-        if thedate == "" or thedate != str(date.today()):
+        if thedate == "" or thedate != str(date.today()): # if a song has already been generated for the day it just prints the same one again #
             thedate = str(date.today())
             await message.channel.send('give me a second to curate the perfect song of the day!')
             info = daily_song()
             title = info['track'][0]['strTrack']
             artist = info['track'][0]['strArtist']
             album = info['track'][0]['strAlbum']
-        await message.channel.send("Song of the Day:")
+            await message.channel.send('ive selected a song!')
+        await message.channel.send(f"Song of the Day for {thedate}:")
         await message.channel.send(f"Title: {title}")
         await message.channel.send(f"Artist: {artist}")
         await message.channel.send(f"Album: {album}")
         if info['track'][0]['strArtist'].lower == "asian kung-fu generation" or info['track'][0]['strArtist'].lower() == "kessoku band":
-            await message.channel.send('omg bocchi the rock reference')  
+            await message.channel.send('omg bocchi the rock reference') 
+
+    # explains what the command is in case users need help #
+    if message.content == '?help':
+        await message.channel.send('send the command "?SOOD" to get the song of the day!')
 
 
-
+    # sends a message if the bot is pinged #
     if client.user.mentioned_in(message):
         await message.channel.send('hi do you wanna talk about jrock i really like jrock')
 
