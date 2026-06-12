@@ -53,7 +53,7 @@ async def on_message(message):
         await message.channel.send('im always larping, except for jrock, i love jrock')
 
 # runs the daily song function and prints out the song's info. also reacts if song of the day is by two specific j-rock artists #
-    if message.content == '?SOOD':
+    if message.content == '?SOTD':
         global thedate
         global info
         global title

@@ -7,7 +7,7 @@ Audio DB, but it warns you beforehand. It displays the song's name, artist, and 
 
 Keywords:
 - pinging the bot, saying 'jrock' or 'j-rock', and mentioning artists natori or Hitsujibungaku all cause the bot to respond with specific messages (not caps/location dependent)
-- asking the bot "?SOOD" will make it generate a song of the day, or send the current one if one has already been generated. "?SOOD" must be the only thing in the message and is caps specific.
+- asking the bot "?SOTD" will make it generate a song of the day, or send the current one if one has already been generated. "?SOOD" must be the only thing in the message and is caps specific.
 - for help, you can send the message "?help".
 
 Future plans:
